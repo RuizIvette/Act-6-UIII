@@ -1,0 +1,49 @@
+<!-- app_Petco/templates/mascota/ver_mascotas.html -->
+{% extends 'base.html' %}
+
+{% block titulo %}Ver Mascotas - Petco Full System{% endblock %}
+
+{% block contenido %}
+    <h1 class="mb-4 text-primary">Listado de Mascotas</h1>
+    <a href="{% url 'agregar_mascota' %}" class="btn btn-success mb-3"><i class="fas fa-plus-circle me-1"></i>Registrar Nueva Mascota</a>
+
+    {% if mascotas %}
+        <div class="table-responsive bg-white p-3 rounded shadow-sm">
+            <table class="table table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID Mascota</th>
+                        <th>Nombre</th>
+                        <th>Especie</th>
+                        <th>Raza</th>
+                        <th>Tipo</th>
+                        <th>Fecha Nac.</th>
+                        <th>Dueño</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mascota in mascotas %}
+                        <tr>
+                            <td>{{ mascota.mascota_id }}</td>
+                            <td>{{ mascota.nombre }}</td>
+                            <td>{{ mascota.especie }}</td>
+                            <td>{{ mascota.raza|default_if_none:"N/A" }}</td>
+                            <td>{{ mascota.tipo|default_if_none:"N/A" }}</td>
+                            <td>{{ mascota.fecha_nac|default_if_none:"N/A" }}</td>
+                            <td>{{ mascota.cliente.nombre }} {{ mascota.cliente.apellido }} (ID: {{ mascota.cliente.cliente_id }})</td>
+                            <td>
+                                <a href="{% url 'actualizar_mascota' mascota.mascota_id %}" class="btn btn-sm btn-info me-2" title="Editar"><i class="fas fa-edit"></i></a>
+                                <a href="{% url 'borrar_mascota' mascota.mascota_id %}" class="btn btn-sm btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            No hay mascotas registradas aún. ¡Empieza agregando una!
+        </div>
+    {% endif %}
+{% endblock %}

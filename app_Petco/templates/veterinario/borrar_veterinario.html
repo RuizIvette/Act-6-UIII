@@ -1,0 +1,18 @@
+<!-- app_Petco/templates/veterinario/borrar_veterinario.html -->
+{% extends 'base.html' %}
+
+{% block titulo %}Eliminar Veterinario - Petco Full System{% endblock %}
+
+{% block contenido %}
+    <h1 class="mb-4 text-danger">Eliminar Veterinario</h1>
+    <div class="alert alert-warning" role="alert">
+        ¿Estás seguro de que quieres eliminar al veterinario <strong>{{ veterinario.nombre }} {{ veterinario.apellido }}</strong> (Licencia: {{ veterinario.licencia }})?
+        Esta acción es irreversible.
+    </div>
+
+    <form method="post" action="{% url 'borrar_veterinario' veterinario.veterinario_id %}" class="bg-white p-4 rounded shadow-sm">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger me-2"><i class="fas fa-trash-alt me-1"></i>Sí, Eliminar</button>
+        <a href="{% url 'ver_veterinarios' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

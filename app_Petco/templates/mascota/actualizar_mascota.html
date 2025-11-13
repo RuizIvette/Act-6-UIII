@@ -1,0 +1,45 @@
+<!-- app_Petco/templates/mascota/actualizar_mascota.html -->
+{% extends 'base.html' %}
+
+{% block titulo %}Actualizar Mascota - Petco Full System{% endblock %}
+
+{% block contenido %}
+    <h1 class="mb-4 text-primary">Actualizar Mascota: {{ mascota.nombre }}</h1>
+
+    <form method="post" action="{% url 'actualizar_mascota' mascota.mascota_id %}" class="bg-white p-4 rounded shadow-sm">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre de la Mascota</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ mascota.nombre }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="especie" class="form-label">Especie</label>
+            <input type="text" class="form-control" id="especie" name="especie" value="{{ mascota.especie }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="raza" class="form-label">Raza (Opcional)</label>
+            <input type="text" class="form-control" id="raza" name="raza" value="{{ mascota.raza|default_if_none:"" }}">
+        </div>
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo (Opcional)</label>
+            <input type="text" class="form-control" id="tipo" name="tipo" value="{{ mascota.tipo|default_if_none:"" }}">
+        </div>
+        <div class="mb-3">
+            <label for="fecha_nac" class="form-label">Fecha de Nacimiento (Opcional)</label>
+            <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" value="{{ mascota.fecha_nac|date:'Y-m-d'|default_if_none:"" }}">
+        </div>
+        <div class="mb-3">
+            <label for="cliente" class="form-label">Dueño (Cliente)</label>
+            <select class="form-select" id="cliente" name="cliente" required>
+                <option value="">Selecciona un cliente</option>
+                {% for cliente in clientes %}
+                    <option value="{{ cliente.cliente_id }}" {% if cliente.cliente_id == mascota.cliente.cliente_id %}selected{% endif %}>
+                        {{ cliente.nombre }} {{ cliente.apellido }} (ID: {{ cliente.cliente_id }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary me-2">Guardar Cambios</button>
+        <a href="{% url 'ver_mascotas' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

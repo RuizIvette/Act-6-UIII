@@ -1,0 +1,40 @@
+<!-- app_Petco/templates/cliente/agregar_cliente.html -->
+{% extends 'base.html' %}
+
+{% block titulo %}Agregar Cliente - Petco 0684{% endblock %}
+
+{% block contenido %}
+    <h1 class="mb-4 text-primary">Agregar Nuevo Cliente</h1>
+
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'agregar_cliente' %}" class="bg-white p-4 rounded shadow-sm">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+        <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido" name="apellido" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono (Opcional)</label>
+            <input type="text" class="form-control" id="telefono" name="telefono">
+        </div>
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección (Opcional)</label>
+            <input type="text" class="form-control" id="direccion" name="direccion">
+        </div>
+        <button type="submit" class="btn btn-primary me-2">Guardar Cliente</button>
+        <a href="{% url 'ver_clientes' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!-- app_Petco/templates/cliente/borrar_cliente.html -->
+{% extends 'base.html' %}
+
+{% block titulo %}Eliminar Cliente - Petco 0684{% endblock %}
+
+{% block contenido %}
+    <h1 class="mb-4 text-danger">Eliminar Cliente</h1>
+    <div class="alert alert-warning" role="alert">
+        ¿Estás seguro de que quieres eliminar al cliente <strong>{{ cliente.nombre }} {{ cliente.apellido }}</strong> (ID: {{ cliente.cliente_id }})?
+        Esta acción es irreversible.
+    </div>
+
+    <form method="post" action="{% url 'borrar_cliente' cliente.cliente_id %}" class="bg-white p-4 rounded shadow-sm">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger me-2"><i class="fas fa-trash-alt me-1"></i>Sí, Eliminar</button>
+        <a href="{% url 'ver_clientes' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,49 @@
+<!-- app_Petco/templates/cita/ver_citas.html -->
+{% extends 'base.html' %}
+
+{% block titulo %}Ver Citas - Petco Full System{% endblock %}
+
+{% block contenido %}
+    <h1 class="mb-4 text-primary">Listado de Citas</h1>
+    <a href="{% url 'agregar_cita' %}" class="btn btn-success mb-3"><i class="fas fa-plus-circle me-1"></i>Agendar Nueva Cita</a>
+
+    {% if citas %}
+        <div class="table-responsive bg-white p-3 rounded shadow-sm">
+            <table class="table table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID Cita</th>
+                        <th>Cliente</th>
+                        <th>Servicio</th>
+                        <th>Veterinario</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Notas</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cita in citas %}
+                        <tr>
+                            <td>{{ cita.cita_id }}</td>
+                            <td>{{ cita.cliente.nombre }} {{ cita.cliente.apellido }}</td>
+                            <td>{{ cita.servicio.nombre_servicio }}</td>
+                            <td>{% if cita.veterinario %}{{ cita.veterinario.nombre }} {{ cita.veterinario.apellido }}{% else %}N/A{% endif %}</td>
+                            <td>{{ cita.fecha_cita }}</td>
+                            <td>{{ cita.hora_cita }}</td>
+                            <td>{{ cita.notas|default_if_none:"N/A"|truncatechars:50 }}</td>
+                            <td>
+                                <a href="{% url 'actualizar_cita' cita.cita_id %}" class="btn btn-sm btn-info me-2" title="Editar"><i class="fas fa-edit"></i></a>
+                                <a href="{% url 'borrar_cita' cita.cita_id %}" class="btn btn-sm btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            No hay citas agendadas aún. ¡Empieza agregando una!
+        </div>
+    {% endif %}
+{% endblock %}

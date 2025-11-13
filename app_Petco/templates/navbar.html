@@ -1,0 +1,84 @@
+<!-- app_Petco/templates/navbar.html -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'inicio_petco' %}">
+            <i class="fas fa-paw me-2"></i>Sistema de Administración Petco
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'inicio_petco' %}"><i class="fas fa-home me-1"></i>Inicio</a>
+                </li>
+
+                <!-- Opciones para Clientes -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarClientes" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-users me-1"></i>Clientes
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarClientes">
+                        <li><a class="dropdown-item" href="{% url 'agregar_cliente' %}">Agregar Cliente</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_clientes' %}">Ver Clientes</a></li>
+                    </ul>
+                </li>
+
+                <!-- Opciones para Mascotas -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarMascotas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-paw me-1"></i>Mascotas
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarMascotas">
+                        <li><a class="dropdown-item" href="{% url 'agregar_mascota' %}">Agregar Mascota</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_mascotas' %}">Ver Mascotas</a></li>
+                    </ul>
+                </li>
+
+                <!-- Opciones para Productos -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarProductos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-box-open me-1"></i>Productos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarProductos">
+                        <li><a class="dropdown-item" href="{% url 'agregar_producto' %}">Agregar Producto</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_productos' %}">Ver Productos</a></li>
+                    </ul>
+                </li>
+
+                <!-- Opciones para Servicios -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarServicios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-hand-holding-heart me-1"></i>Servicios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarServicios">
+                        <li><a class="dropdown-item" href="{% url 'agregar_servicio' %}">Agregar Servicio</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_servicios' %}">Ver Servicios</a></li>
+                    </ul>
+                </li>
+
+                <!-- Opciones para Veterinarios -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarVeterinarios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-md me-1"></i>Veterinarios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarVeterinarios">
+                        <li><a class="dropdown-item" href="{% url 'agregar_veterinario' %}">Agregar Veterinario</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_veterinarios' %}">Ver Veterinarios</a></li>
+                    </ul>
+                </li>
+
+                <!-- Opciones para Citas -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarCitas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-calendar-alt me-1"></i>Citas
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarCitas">
+                        <li><a class="dropdown-item" href="{% url 'agregar_cita' %}">Agendar Cita</a></li>
+                        <li><a class="dropdown-item" href="{% url 'ver_citas' %}">Ver Citas</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

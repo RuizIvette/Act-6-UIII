@@ -1,0 +1,18 @@
+<!-- app_Petco/templates/producto/borrar_producto.html -->
+{% extends 'base.html' %}
+
+{% block titulo %}Eliminar Producto - Petco 0684{% endblock %}
+
+{% block contenido %}
+    <h1 class="mb-4 text-danger">Eliminar Producto</h1>
+    <div class="alert alert-warning" role="alert">
+        ¿Estás seguro de que quieres eliminar el producto <strong>{{ producto.nombre_producto }}</strong> (Categoría: {{ producto.categoria }})?
+        Esta acción es irreversible.
+    </div>
+
+    <form method="post" action="{% url 'borrar_producto' producto.producto_id %}" class="bg-white p-4 rounded shadow-sm">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger me-2"><i class="fas fa-trash-alt me-1"></i>Sí, Eliminar</button>
+        <a href="{% url 'ver_productos' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

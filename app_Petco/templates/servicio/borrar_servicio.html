@@ -1,0 +1,18 @@
+<!-- app_Petco/templates/servicio/borrar_servicio.html -->
+{% extends 'base.html' %}
+
+{% block titulo %}Eliminar Servicio - Petco Full System{% endblock %}
+
+{% block contenido %}
+    <h1 class="mb-4 text-danger">Eliminar Servicio</h1>
+    <div class="alert alert-warning" role="alert">
+        ¿Estás seguro de que quieres eliminar el servicio <strong>{{ servicio.nombre_servicio }}</strong> (Categoría: {{ servicio.categoria }})?
+        Esta acción es irreversible.
+    </div>
+
+    <form method="post" action="{% url 'borrar_servicio' servicio.servicio_id %}" class="bg-white p-4 rounded shadow-sm">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger me-2"><i class="fas fa-trash-alt me-1"></i>Sí, Eliminar</button>
+        <a href="{% url 'ver_servicios' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

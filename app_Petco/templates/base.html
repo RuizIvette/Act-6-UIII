@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Petco Full System{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f8f9fa; /* Color de fondo suave */
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            background-color: #e9ecef; /* Color suave para el footer */
+            color: #495057;
+            padding: 1rem 0;
+            text-align: center;
+            margin-top: auto; /* Empuja el footer hacia abajo */
+            border-top: 1px solid #dee2e6; /* Línea sutil en la parte superior */
+        }
+        .navbar {
+            background-color: #f0f8ff !important; /* Un azul muy claro */
+            border-bottom: 1px solid #cfe2ff; /* Borde inferior para la navbar */
+        }
+        .navbar-brand, .nav-link {
+            color: #343a40 !important; /* Texto oscuro */
+        }
+        .dropdown-menu {
+            background-color: #e2f0ff; /* Fondo para el menú desplegable */
+            border: 1px solid #bee5eb;
+        }
+        .dropdown-item:hover {
+            background-color: #cce5ff; /* Color al pasar el mouse por los ítems del dropdown */
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container content mt-4">
+        {% block contenido %}
+        {% endblock %}
+    </div>
+    {% include 'footer.html' %}
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

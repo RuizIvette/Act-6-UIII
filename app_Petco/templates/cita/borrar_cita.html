@@ -1,0 +1,19 @@
+<!-- app_Petco/templates/cita/borrar_cita.html -->
+{% extends 'base.html' %}
+
+{% block titulo %}Eliminar Cita - Petco Full System{% endblock %}
+
+{% block contenido %}
+    <h1 class="mb-4 text-danger">Eliminar Cita</h1>
+    <div class="alert alert-warning" role="alert">
+        ¿Estás seguro de que quieres eliminar la cita para el cliente <strong>{{ cita.cliente.nombre }} {{ cita.cliente.apellido }}</strong>
+        con el servicio <strong>{{ cita.servicio.nombre_servicio }}</strong> el día <strong>{{ cita.fecha_cita }}</strong> a las <strong>{{ cita.hora_cita }}</strong>?
+        Esta acción es irreversible.
+    </div>
+
+    <form method="post" action="{% url 'borrar_cita' cita.cita_id %}" class="bg-white p-4 rounded shadow-sm">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger me-2"><i class="fas fa-trash-alt me-1"></i>Sí, Eliminar</button>
+        <a href="{% url 'ver_citas' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

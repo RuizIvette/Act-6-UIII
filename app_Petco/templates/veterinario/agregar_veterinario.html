@@ -1,0 +1,45 @@
+<!-- app_Petco/templates/veterinario/agregar_veterinario.html -->
+{% extends 'base.html' %}
+
+{% block titulo %}Agregar Veterinario - Petco Full System{% endblock %}
+
+{% block contenido %}
+    <h1 class="mb-4 text-primary">Agregar Nuevo Veterinario</h1>
+
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'agregar_veterinario' %}" class="bg-white p-4 rounded shadow-sm">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+        <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido" name="apellido" required>
+        </div>
+        <div class="mb-3">
+            <label for="licencia" class="form-label">Número de Licencia</label>
+            <input type="text" class="form-control" id="licencia" name="licencia" required>
+        </div>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono (Opcional)</label>
+            <input type="text" class="form-control" id="telefono" name="telefono">
+        </div>
+        <div class="mb-3">
+            <label for="especialidad" class="form-label">Especialidad (Opcional)</label>
+            <select class="form-select" id="especialidad" name="especialidad">
+                <option value="">Selecciona una especialidad</option>
+                {% for esp in especialidades %}
+                    <option value="{{ esp }}">{{ esp }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary me-2">Guardar Veterinario</button>
+        <a href="{% url 'ver_veterinarios' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

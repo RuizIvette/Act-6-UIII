@@ -1,0 +1,65 @@
+<!-- app_Petco/templates/cita/actualizar_cita.html -->
+{% extends 'base.html' %}
+
+{% block titulo %}Actualizar Cita - Petco Full System{% endblock %}
+
+{% block contenido %}
+    <h1 class="mb-4 text-primary">Actualizar Cita: {{ cita.cita_id }}</h1>
+
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'actualizar_cita' cita.cita_id %}" class="bg-white p-4 rounded shadow-sm">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="cliente" class="form-label">Cliente</label>
+            <select class="form-select" id="cliente" name="cliente" required>
+                <option value="">Selecciona un cliente</option>
+                {% for c in clientes %}
+                    <option value="{{ c.cliente_id }}" {% if c.cliente_id == cita.cliente.cliente_id %}selected{% endif %}>
+                        {{ c.nombre }} {{ c.apellido }} (ID: {{ c.cliente_id }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="servicio" class="form-label">Servicio</label>
+            <select class="form-select" id="servicio" name="servicio" required>
+                <option value="">Selecciona un servicio</option>
+                {% for s in servicios %}
+                    <option value="{{ s.servicio_id }}" {% if s.servicio_id == cita.servicio.servicio_id %}selected{% endif %}>
+                        {{ s.nombre_servicio }} ({{ s.categoria }}) - ${{ s.precio|floatformat:2 }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="veterinario" class="form-label">Veterinario (Opcional)</label>
+            <select class="form-select" id="veterinario" name="veterinario">
+                <option value="">Ninguno</option>
+                {% for v in veterinarios %}
+                    <option value="{{ v.veterinario_id }}" {% if cita.veterinario and v.veterinario_id == cita.veterinario.veterinario_id %}selected{% endif %}>
+                        {{ v.nombre }} {{ v.apellido }} ({{ v.especialidad|default_if_none:"General" }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="fecha_cita" class="form-label">Fecha de la Cita</label>
+            <input type="date" class="form-control" id="fecha_cita" name="fecha_cita" value="{{ cita.fecha_cita_formatted }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="hora_cita" class="form-label">Hora de la Cita</label>
+            <input type="time" class="form-control" id="hora_cita" name="hora_cita" value="{{ cita.hora_cita_formatted }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="notas" class="form-label">Notas (Opcional)</label>
+            <textarea class="form-control" id="notas" name="notas" rows="3">{{ cita.notas|default_if_none:"" }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary me-2">Guardar Cambios</button>
+        <a href="{% url 'ver_citas' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}
